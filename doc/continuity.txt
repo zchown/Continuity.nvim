@@ -1,0 +1,81 @@
+
+---
+
+## doc/continuity.txt
+
+```vim
+*continuity.txt*    Continuity.nvim - Automatic session management for Neovim
+=======================================================================
+
+CONTENTS                                              *continuity-contents*
+
+    1. NAME
+    2. DESCRIPTION
+    3. INSTALLATION
+    4. USAGE
+    5. CONFIGURATION
+    6. COMMANDS
+    7. AUTHOR
+    8. LICENSE
+
+1. NAME                                             *continuity-name*
+    Continuity.nvim - Automatically saves and restores sessions with option tracking.
+
+2. DESCRIPTION                                      *continuity-description*
+    Continuity.nvim helps maintain your editing session across restarts.
+    It automatically saves your current session and additional configuration options,
+    making it easier to resume work exactly where you left off.
+
+3. INSTALLATION                                     *continuity-installation*
+    To install Continuity.nvim using [lazy.nvim](https://github.com/folke/lazy.nvim), add the following to your lazy configuration:
+
+        {
+          "yourusername/continuity.nvim",
+          config = function()
+            require("continuity").setup({
+              save_on_exit = v:true,
+              save_on_save = v:false,
+              save_options = v:true,
+              session_dir = $HOME . "/.vim/session/",
+              current_dir = substitute(getcwd(), '/', '_', 'g'),
+              tracking = [ 'vim.g.copilot_enabled', 'vim.g.DoCursorHighlight' ]
+            })
+          end
+        }
+
+    After installing, run :helptags doc/ to generate the help tags.
+
+4. USAGE                                           *continuity-usage*
+    When starting Neovim without extra arguments, Continuity.nvim automatically
+    loads the saved session and options if available. On exit, it saves the session.
+    It also provides several user commands to manage sessions manually.
+
+5. CONFIGURATION                                   *continuity-configuration*
+    The plugin can be configured by calling the setup function in your Neovim config:
+
+        lua require('continuity').setup({ ... })
+
+    Configuration options include:
+      - **save_on_exit:** Enable or disable auto-saving on exit.
+      - **save_on_save:** Save the session on every buffer write.
+      - **save_options:** Enable saving additional options.
+      - **session_dir:** Directory to store session files.
+      - **current_dir:** A sanitized version of the current working directory.
+      - **tracking:** List of options to track.
+
+6. COMMANDS                                        *continuity-commands*
+    The following commands are available:
+      - **:SaveContinuity**      Save the current session and options.
+      - **:DeleteContinuity**    Delete the saved session and options.
+      - **:StartContinuity**     Enable automatic session saving.
+      - **:StopContinuity**      Disable automatic session saving.
+
+7. AUTHOR                                          *continuity-author*
+    Your Name <zchown@icloud.com>
+    GitHub: https://github.com/zchown
+
+8. LICENSE                                         *continuity-license*
+    This plugin is distributed under the Apache License 2.0.
+    For more details, see the LICENSE file or visit:
+        https://www.apache.org/licenses/LICENSE-2.0
+
