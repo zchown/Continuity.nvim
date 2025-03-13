@@ -30,7 +30,7 @@ CONTENTS                                              *continuity-contents*
     To install Continuity.nvim using [lazy.nvim](https://github.com/folke/lazy.nvim), add the following to your lazy configuration:
 
         {
-          "yourusername/continuity.nvim",
+          "zchown/continuity.nvim",
           config = function()
             require("continuity").setup({
               save_on_exit = v:true,
